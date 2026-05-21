@@ -3,58 +3,50 @@ set -euo pipefail
 
 REPO="zixuandai0217/MySkills"
 BRANCH="main"
-RAW_BASE="https://raw.githubusercontent.com/${REPO}/${BRANCH}"
-API_BASE="https://api.github.com/repos/${REPO}/contents"
+TARBALL_URL="https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz"
 
 TARGET_DIR="${1:-.}"
+TARGET_DIR="$(cd "$TARGET_DIR" && pwd)"
+TMP_DIR="$(mktemp -d)"
 
-fetch() {
-  if command -v curl &>/dev/null; then
-    curl -fsSL "$1"
-  elif command -v wget &>/dev/null; then
-    wget -qO- "$1"
-  else
-    echo "错误: 需要 curl 或 wget" >&2
-    exit 1
-  fi
-}
+cleanup() { rm -rf "$TMP_DIR"; }
+trap cleanup EXIT
 
-download_dir() {
-  local api_path="$1"
-  local local_base="$2"
-
-  local listing
-  listing=$(fetch "${API_BASE}/${api_path}?ref=${BRANCH}")
-
-  echo "$listing" | python3 -c "
-import sys, json
-for item in json.load(sys.stdin):
-    print(item['type'], item['path'])
-" | while read -r type path; do
-    if [ "$type" = "dir" ]; then
-      mkdir -p "${local_base}/${path}"
-      download_dir "$path" "$local_base"
-    else
-      echo "  下载: ${path}"
-      mkdir -p "${local_base}/$(dirname "$path")"
-      fetch "${RAW_BASE}/${path}" > "${local_base}/${path}"
-    fi
-  done
-}
-
-echo "=== MySkills 安装脚本 ==="
-echo "目标目录: $(cd "$TARGET_DIR" && pwd)"
+echo "=== MySkills 安装脚本 (tarball 模式) ==="
+echo "目标目录: ${TARGET_DIR}"
 echo ""
 
-echo "[1/2] 下载 AGENTS.md ..."
-fetch "${RAW_BASE}/AGENTS.md" > "${TARGET_DIR}/AGENTS.md"
-echo "  完成"
+echo "[1/2] 下载仓库归档 ..."
+if command -v curl &>/dev/null; then
+  curl -fsSL --retry 3 --retry-delay 3 "$TARBALL_URL" -o "${TMP_DIR}/repo.tar.gz"
+elif command -v wget &>/dev/null; then
+  wget -qO "${TMP_DIR}/repo.tar.gz" "$TARBALL_URL"
+else
+  echo "错误: 需要 curl 或 wget" >&2
+  exit 1
+fi
+echo "  完成 ($(du -h "${TMP_DIR}/repo.tar.gz" | cut -f1) 已下载)"
 
-echo "[2/2] 下载 .agents/ 目录 ..."
-mkdir -p "${TARGET_DIR}/.agents"
-download_dir ".agents" "$TARGET_DIR"
-echo "  完成"
+echo "[2/2] 解压并安装文件 ..."
+tar -xzf "${TMP_DIR}/repo.tar.gz" -C "$TMP_DIR"
+
+EXTRACTED_DIR="${TMP_DIR}/MySkills-${BRANCH}"
+if [ ! -d "$EXTRACTED_DIR" ]; then
+  EXTRACTED_DIR="$(find "$TMP_DIR" -maxdepth 1 -type d ! -path "$TMP_DIR" | head -1)"
+fi
+
+cp -f "${EXTRACTED_DIR}/AGENTS.md" "${TARGET_DIR}/AGENTS.md"
+echo "  已安装: AGENTS.md"
+
+rm -rf "${TARGET_DIR}/.agents"
+cp -R "${EXTRACTED_DIR}/.agents" "${TARGET_DIR}/.agents"
+
+SKILL_COUNT="$(ls "${TARGET_DIR}/.agents/skills/" | wc -l | tr -d ' ')"
+echo "  已安装: .agents/skills/ (${SKILL_COUNT} 个技能包)"
 
 echo ""
 echo "=== 安装完成! ==="
-echo "文件已下载到: $(cd "$TARGET_DIR" && pwd)"
+echo "文件已下载到: ${TARGET_DIR}"
+echo ""
+echo "已安装的技能包:"
+ls "${TARGET_DIR}/.agents/skills/" | sed 's/^/  - /'
