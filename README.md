@@ -1,6 +1,6 @@
 # MySkills
 
-AI Agent Skills 集合 —— 包含 35 个技能包（`.agents/skills/`）和协作协议（`AGENTS.md`）。
+AI Agent Skills 集合 —— 包含 34 个技能包（`.agents/skills/`）和协作协议（`AGENTS.md`）。
 
 ## 一键安装
 
@@ -29,7 +29,7 @@ curl -fsSL https://raw.githubusercontent.com/zixuandai0217/MySkills/main/install
 | 文件 | 说明 |
 |------|------|
 | `AGENTS.md` | Agent 协作与上下文优化协议 |
-| `.agents/skills/` | 35 个技能包（见下方列表） |
+| `.agents/skills/` | 34 个技能包（见下方列表） |
 
 ## 技能包列表
 
@@ -45,7 +45,6 @@ curl -fsSL https://raw.githubusercontent.com/zixuandai0217/MySkills/main/install
 | `executing-plans` | 计划执行 |
 | `finishing-a-development-branch` | 开发分支收尾 |
 | `frontend-design` | 前端设计 |
-| `frontend-slides` | HTML 动画演示文稿创建与 PPT 转换 |
 | `humanizer` | 文本人性化润色 |
 | `internal-comms` | 内部沟通 |
 | `mcp-builder` | MCP Server 构建 |
