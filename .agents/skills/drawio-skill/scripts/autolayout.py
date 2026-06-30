@@ -32,10 +32,10 @@ import sys
 from xml.sax.saxutils import escape
 
 DEFAULT_W, DEFAULT_H = 120, 60
-DEFAULT_FONT = "fontFamily=Georgia;"
+DEFAULT_FONT = "fontFamily=Comic Sans MS;"
 NODE_STYLE = f"rounded=1;whiteSpace=wrap;html=1;{DEFAULT_FONT}fillColor=#dae8fc;strokeColor=#6c8ebf;"
 EDGE_STYLE = "html=1;rounded=0;"
-GROUP_STYLE = ("rounded=0;whiteSpace=wrap;html=1;fontFamily=Georgia;fillColor=none;strokeColor=#999999;"
+GROUP_STYLE = ("rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=none;strokeColor=#999999;"
                "verticalAlign=top;fontStyle=2;dashed=1;")
 # Group colours come from the skill's own palette (styles/built-in/default.json)
 # so there is a single source of truth, not a second list baked in here. When a

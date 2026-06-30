@@ -56,7 +56,7 @@ Resolve paths relative to this skill directory. Load only the files needed for t
    Identify whether this is prompt-to-diagram, paper-to-diagram, codebase-to-diagram, reference-image replication, export/repair, or iterative polish. Ask only for missing information that affects output: diagram type, fidelity, required labels/assets, output path, and output format.
 
 2. **Resolve style and shape sources.**
-   If a user preset is named, apply `references/style-presets.md`. If no preset is active, use restrained default colors and consistent fonts. For non-trivial vendor or domain shapes, run `scripts/shapesearch.py "<keywords>"` instead of guessing `shape=mxgraph.*`. For AI logos, use `scripts/aiicons.py`.
+   If a user preset is named, apply `references/style-presets.md`. If no preset is active, use restrained default colors and `Comic Sans MS` as the default font. For non-trivial vendor or domain shapes, run `scripts/shapesearch.py "<keywords>"` instead of guessing `shape=mxgraph.*`. For AI logos, use `scripts/aiicons.py`.
 
 3. **Plan the diagram before XML.**
    Select layout grammar: left-to-right pipeline, top-down process, swimlanes, layered architecture, hierarchy/tree, graph, feedback loop, or page-per-view. For high-fidelity or dense work, write a coordinate plan with canvas size, margins, regions, key x/y baselines, repeated component sizes, and connector routes.
