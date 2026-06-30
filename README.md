@@ -1,6 +1,6 @@
 # MySkills
 
-AI Agent Skills 集合 —— 包含 34 个技能包（`.agents/skills/`）和协作协议（`AGENTS.md`）。
+AI Agent Skills 集合 —— 包含 35 个技能包（`.agents/skills/`）、Claude skill 目录（`.claude/skills/`）和协作协议（`AGENTS.md`）。
 
 ## 一键安装
 
@@ -29,7 +29,8 @@ curl -fsSL https://raw.githubusercontent.com/zixuandai0217/MySkills/main/install
 | 文件 | 说明 |
 |------|------|
 | `AGENTS.md` | Agent 协作与上下文优化协议 |
-| `.agents/skills/` | 34 个技能包（见下方列表） |
+| `.agents/skills/` | 35 个技能包（见下方列表） |
+| `.claude/skills/` | Claude Code 可用技能包；当前包含增强版 `drawio-skill` |
 
 ## 技能包列表
 
@@ -42,6 +43,7 @@ curl -fsSL https://raw.githubusercontent.com/zixuandai0217/MySkills/main/install
 | `dispatching-parallel-agents` | 并行 Agent 调度 |
 | `doc-coauthoring` | 文档协作 |
 | `docx` | Word 文档处理 |
+| `drawio-skill` | draw.io/diagrams.net 技术图、科研图、复刻图与导出 |
 | `executing-plans` | 计划执行 |
 | `finishing-a-development-branch` | 开发分支收尾 |
 | `frontend-design` | 前端设计 |

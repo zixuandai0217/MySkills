@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="zixuandai0217/MySkills"
-BRANCH="main"
-TARBALL_URL="https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz"
+REPO="${REPO:-zixuandai0217/MySkills}"
+BRANCH="${BRANCH:-main}"
+TARBALL_URL="${TARBALL_URL:-https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz}"
 
 TARGET_DIR="${1:-.}"
 TARGET_DIR="$(cd "$TARGET_DIR" && pwd)"
@@ -44,9 +44,23 @@ cp -R "${EXTRACTED_DIR}/.agents" "${TARGET_DIR}/.agents"
 SKILL_COUNT="$(ls "${TARGET_DIR}/.agents/skills/" | wc -l | tr -d ' ')"
 echo "  已安装: .agents/skills/ (${SKILL_COUNT} 个技能包)"
 
+if [ -d "${EXTRACTED_DIR}/.claude/skills" ]; then
+  mkdir -p "${TARGET_DIR}/.claude"
+  rm -rf "${TARGET_DIR}/.claude/skills"
+  cp -R "${EXTRACTED_DIR}/.claude/skills" "${TARGET_DIR}/.claude/skills"
+
+  CLAUDE_SKILL_COUNT="$(ls "${TARGET_DIR}/.claude/skills/" | wc -l | tr -d ' ')"
+  echo "  已安装: .claude/skills/ (${CLAUDE_SKILL_COUNT} 个技能包)"
+fi
+
 echo ""
 echo "=== 安装完成! ==="
 echo "文件已下载到: ${TARGET_DIR}"
 echo ""
 echo "已安装的技能包:"
 ls "${TARGET_DIR}/.agents/skills/" | sed 's/^/  - /'
+if [ -d "${TARGET_DIR}/.claude/skills" ]; then
+  echo ""
+  echo "已安装的 Claude 技能包:"
+  ls "${TARGET_DIR}/.claude/skills/" | sed 's/^/  - /'
+fi
