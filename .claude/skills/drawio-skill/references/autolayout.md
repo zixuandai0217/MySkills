@@ -8,16 +8,34 @@ For small or carefully-styled diagrams, keep hand-placing — auto-layout trades
 
 ## Dependency
 
-Requires Graphviz `dot` on PATH:
+Requires Graphviz `dot` on PATH. If `dot` is missing, `scripts/autolayout.py`
+automatically calls `scripts/ensure_graphviz.py` and retries once after the
+install attempt.
+
+You can run the helper directly when you want to preflight or install Graphviz:
 
 ```bash
-# macOS
-brew install graphviz
-# Debian/Ubuntu
-sudo apt install graphviz
+python3 <this-skill-dir>/scripts/ensure_graphviz.py
+python3 <this-skill-dir>/scripts/ensure_graphviz.py --dry-run
 ```
 
-The script exits with a clear message if `dot` is missing — fall back to hand-placed coordinates in that case.
+Supported install paths:
+
+| Platform | Package manager |
+|---|---|
+| macOS | Homebrew (`brew install graphviz`), then MacPorts fallback |
+| Debian/Ubuntu | `apt-get install graphviz` or `apt install graphviz` |
+| Fedora/RHEL | `dnf install graphviz` or `yum install graphviz` |
+| Arch | `pacman -S graphviz` |
+| Alpine | `apk add graphviz` |
+| Windows | `winget install --id Graphviz.Graphviz -e`, then Chocolatey fallback |
+
+If no supported package manager is available or install fails, install manually
+from https://graphviz.org/download/ and rerun the autolayout command.
+
+On Homebrew, if the install fails with `Directory not empty @ dir_s_rmdir -
+/opt/homebrew/opt/<formula>`, the helper backs up that stale `opt` directory
+and retries the Graphviz install once.
 
 ## Usage
 

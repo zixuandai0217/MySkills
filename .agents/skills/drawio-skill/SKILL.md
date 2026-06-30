@@ -37,7 +37,7 @@ Resolve paths relative to this skill directory. Load only the files needed for t
 | `references/reference-replication-protocol.md` | User supplies a reference image and asks to redraw, copy, reproduce, replicate, or closely match it |
 | `references/shapes.md` and `scripts/shapesearch.py` | Need exact built-in draw.io shapes for AWS, Azure, GCP, Cisco, Kubernetes, UML, BPMN, ER, electrical, P&ID, network, or other palettes |
 | `scripts/aiicons.py` | Need AI/LLM brand logos such as OpenAI, Claude, Gemini, Mistral, Llama, Hugging Face, Ollama, or LangChain |
-| `references/autolayout.md` and `scripts/autolayout.py` | Diagram is large or graph-like, especially dependency graphs, call graphs, code structure, or more than about 15 nodes |
+| `references/autolayout.md`, `scripts/autolayout.py`, and `scripts/ensure_graphviz.py` | Diagram is large or graph-like, especially dependency graphs, call graphs, code structure, or more than about 15 nodes; install Graphviz automatically if `dot` is missing |
 | `scripts/pyimports.py`, `jsimports.py`, `goimports.py`, `rustimports.py` | User asks to visualize project imports for Python, JS/TS, Go, or Rust |
 | `scripts/pyclasses.py` | User asks for a Python class hierarchy or class diagram |
 | `references/style-presets.md` and `references/style-extraction.md` | User asks to learn, apply, list, set default, delete, or manage a style preset |

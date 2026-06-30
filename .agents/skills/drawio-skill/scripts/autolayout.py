@@ -27,8 +27,10 @@ import argparse
 import json
 import os
 import shlex
+import shutil
 import subprocess
 import sys
+from pathlib import Path
 from xml.sax.saxutils import escape
 
 DEFAULT_W, DEFAULT_H = 120, 60
@@ -151,13 +153,15 @@ def layout(dot_src):
     Node coords are inches (bottom-left origin); each edge's value is the list
     of orthogonal control points dot computed for routing, endpoints included.
     """
+    if shutil.which("dot") is None:
+        ensure_graphviz()
     try:
         proc = subprocess.run(
             ["dot", "-Tplain"], input=dot_src,
             capture_output=True, text=True, check=True,
         )
     except FileNotFoundError:
-        sys.exit("error: Graphviz `dot` not found on PATH (brew install graphviz)")
+        sys.exit("error: Graphviz `dot` is still not on PATH after install attempt")
     except subprocess.CalledProcessError as exc:
         sys.exit(f"error: dot failed: {exc.stderr.strip()}")
     height, pos, edges = 0.0, {}, {}
@@ -175,6 +179,22 @@ def layout(dot_src):
                 (float(tok[4 + 2 * i]), float(tok[5 + 2 * i])) for i in range(n)
             ]
     return height, pos, edges
+
+
+def ensure_graphviz():
+    """Install Graphviz with the bundled helper, then retry dot discovery."""
+    helper = Path(__file__).with_name("ensure_graphviz.py")
+    print("Graphviz `dot` not found; attempting to install Graphviz...", file=sys.stderr)
+    proc = subprocess.run([sys.executable, str(helper)], capture_output=True, text=True)
+    dot_path = proc.stdout.strip().splitlines()[-1] if proc.stdout.strip() else ""
+    if dot_path:
+        print(dot_path, file=sys.stderr)
+        dot_dir = str(Path(dot_path).parent)
+        os.environ["PATH"] = dot_dir + os.pathsep + os.environ.get("PATH", "")
+    if proc.stderr.strip():
+        print(proc.stderr.strip(), file=sys.stderr)
+    if proc.returncode != 0 or shutil.which("dot") is None:
+        sys.exit("error: Graphviz `dot` not found and automatic install failed")
 
 
 def group_style(stroke):
