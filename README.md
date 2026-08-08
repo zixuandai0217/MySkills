@@ -1,6 +1,6 @@
 # MySkills
 
-AI Agent Skills 集合，包含 11 个技能包（`.agents/skills/`）。
+AI Agent Skills 集合，包含 12 个技能包（`.agents/skills/`）。
 
 当前目录下 skill 数量以 `.agents/skills/` 为准（安装脚本会打印实际数量）。
 
@@ -44,7 +44,7 @@ BACKUP=0 bash install.sh /path/to/project
 
 | 文件 | 说明 |
 |------|------|
-| `.agents/skills/` | 11 个技能包的源目录 |
+| `.agents/skills/` | 12 个技能包的源目录 |
 
 ## 技能包列表
 
@@ -52,6 +52,7 @@ BACKUP=0 bash install.sh /path/to/project
 |--------|------|
 | `docx` | Word 文档处理 |
 | `drawio-skill` | draw.io 可编辑技术图 |
+| `excalidraw-skill` | Excalidraw 白板、手绘风与轻量架构草图 |
 | `frontend-design` | 生产级前端界面实现 |
 | `grill-me` | 手动启动方案或设计压力测试 |
 | `grilling` | 逐项追问计划、决策或想法中的关键分支 |
@@ -62,12 +63,15 @@ BACKUP=0 bash install.sh /path/to/project
 | `skill-creator` | 创建和更新 skill |
 | `xlsx` | Excel 表格处理 |
 
+`excalidraw-skill` 来自 [Agents365-ai/excalidraw-skill](https://github.com/Agents365-ai/excalidraw-skill) `v1.3.0`，采用 MIT License。
+
 `grill-me` 和 `grilling` 来自 [mattpocock/skills](https://github.com/mattpocock/skills)，采用 MIT License。
 
 ## 使用约定
 
 - 按任务需要加载最匹配的 skill，不设置 always-on skill。
 - 只路由到 `.agents/skills/` 中实际存在的 skill。
+- `excalidraw-skill` 用于可编辑 `.excalidraw`、白板、手绘风和轻量草图；精确 UML、品牌图标或高保真技术图使用 `drawio-skill`。
 - `grill-me` 是手动入口，使用时显式输入 `$grill-me`。
 - `grilling` 是实际执行追问的 skill，也可能根据"压力测试方案"等语义自动触发。
 - `grill-me` 依赖 `grilling`，维护或分发时应保留两者。
@@ -76,6 +80,7 @@ BACKUP=0 bash install.sh /path/to/project
 示例：
 
 ```text
+$excalidraw-skill 画一张可编辑的手绘风系统架构草图。
 $grill-me 请压力测试这个方案。在我确认之前不要开始实现。
 $installing-myskills 将整套 MySkills 安装到 /path/to/target。
 ```
