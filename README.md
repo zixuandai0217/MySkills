@@ -1,6 +1,6 @@
 # MySkills
 
-AI Agent Skills 集合，包含 12 个技能包（`.agents/skills/`）。
+AI Agent Skills 集合，包含 7 个技能包（`.agents/skills/`）。
 
 当前目录下 skill 数量以 `.agents/skills/` 为准（安装脚本会打印实际数量）。
 
@@ -44,24 +44,19 @@ BACKUP=0 bash install.sh /path/to/project
 
 | 文件 | 说明 |
 |------|------|
-| `.agents/skills/` | 12 个技能包的源目录 |
+| `.agents/skills/` | 7 个技能包的源目录 |
 
 ## 技能包列表
 
 | 技能包 | 用途 |
 |--------|------|
-| `docx` | Word 文档处理 |
 | `drawio-skill` | draw.io 可编辑技术图 |
 | `excalidraw-skill` | Excalidraw 白板、手绘风与轻量架构草图 |
-| `frontend-design` | 生产级前端界面实现 |
 | `grill-me` | 手动启动方案或设计压力测试 |
 | `grilling` | 逐项追问计划、决策或想法中的关键分支 |
 | `humanizer` | 去 AI 腔、学术与文案润色 |
 | `installing-myskills` | 安装或更新整套 MySkills 到当前或指定目录 |
-| `pdf` | PDF 文档处理 |
-| `pptx` | PowerPoint 演示文稿处理 |
 | `skill-creator` | 创建和更新 skill |
-| `xlsx` | Excel 表格处理 |
 
 `excalidraw-skill` 来自 [Agents365-ai/excalidraw-skill](https://github.com/Agents365-ai/excalidraw-skill) `v1.3.0`，采用 MIT License。
 
