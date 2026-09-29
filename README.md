@@ -1,6 +1,6 @@
 # MySkills
 
-AI Agent Skills 集合，包含 29 个技能包（`.agents/skills/`）。
+AI Agent Skills 集合，包含 28 个技能包（`.agents/skills/`）。
 
 当前目录下 skill 数量以 `.agents/skills/` 为准（安装脚本会打印实际数量）。
 
@@ -44,18 +44,17 @@ BACKUP=0 bash install.sh /path/to/project
 
 | 文件 | 说明 |
 |------|------|
-| `.agents/skills/` | 29 个技能包的源目录 |
+| `.agents/skills/` | 28 个技能包的源目录 |
 
 ## 技能包列表
 
-### 基础技能包(4 个)
+### 基础技能包(3 个)
 
 | 技能包 | 用途 |
 |--------|------|
-| `drawio-skill` | draw.io 可编辑技术图 |
-| `humanizer` | 去 AI 腔、学术与文案润色 |
+| `drawio-skill` | draw.io 可编辑技术图 (v3.4.0) |
+| `humanizer` | 去 AI 腔、学术与文案润色 (v3.1.0) |
 | `installing-myskills` | 安装或更新整套 MySkills 到当前或指定目录 |
-| `skill-creator` | 创建和更新 skill |
 
 ### mattpocock/skills 技能包(25 个,v1.2.3)
 
