@@ -1,6 +1,6 @@
 # MySkills
 
-AI Agent Skills 集合，包含 28 个技能包（`.agents/skills/`）。
+AI Agent Skills 集合，包含 29 个技能包（`.agents/skills/`）。
 
 当前目录下 skill 数量以 `.agents/skills/` 为准（安装脚本会打印实际数量）。
 
@@ -44,17 +44,18 @@ BACKUP=0 bash install.sh /path/to/project
 
 | 文件 | 说明 |
 |------|------|
-| `.agents/skills/` | 28 个技能包的源目录 |
+| `.agents/skills/` | 29 个技能包的源目录 |
 
 DSH 还会扫描 `<项目根>/.dsh/skills`（优先级高于 `.agents/skills`）和 `~/.dsh/skills`、`~/.agents/skills`。本仓库统一用 `.agents/skills/`，安装脚本也只写这一处——**别为了"保险"再往别的根目录放一份**，同名技能会由 DSH 裁决，出问题时很难查。
 
 ## 技能包列表
 
-### 基础技能包(3 个)
+### 基础技能包(4 个)
 
 | 技能包 | 用途 |
 |--------|------|
 | `drawio-skill` | draw.io 可编辑技术图 (v3.4.0) |
+| `archify` | 架构/时序/数据流/ERD 等图与一页讲解，输出可交互独立 HTML (v3.2.0) |
 | `humanizer` | 去 AI 腔、学术与文案润色 (v3.1.0) |
 | `installing-myskills` | 安装或更新整套 MySkills 到当前或指定目录 |
 
@@ -103,6 +104,8 @@ DSH 还会扫描 `<项目根>/.dsh/skills`（优先级高于 `.agents/skills`）
 | `writing-for-agents` | 给 agent 写文档(skills / AGENTS.md / CLAUDE.md)的方法论 |
 
 `drawio-skill` 的部分内容来自 [Agents365-ai](https://github.com/Agents365-ai) 相关许可文件。
+
+`archify` 来自 [tt-a1i/archify](https://github.com/tt-a1i/archify) v3.2.0（`archify/` 目录原样收录），采用 MIT License，许可文件见 `.agents/skills/archify/LICENSE`。
 
 ## 使用教程
 
@@ -323,6 +326,7 @@ DSH 的 skill 插件会扫描你消息里**任何以空白分隔的 `/名字` �
 | `wizard` | `/wizard 配一下 Stripe 密钥` | 生成交互式 bash 向导，走只有人能做的步骤 |
 | `writing-for-agents` | `帮我写个 skill` | 写 skills / `AGENTS.md` 的方法论 |
 | `drawio-skill` | `/drawio-skill 画系统架构图` | 可编辑 draw.io 图 |
+| `archify` | `用 archify 画一下这个请求链路` | 可交互 HTML 图或一页讲解 |
 | `humanizer` | `帮我把这段去 AI 腔` | 去 AI 写作痕迹 |
 | `installing-myskills` | `/installing-myskills` | 安装整套 MySkills |
 
